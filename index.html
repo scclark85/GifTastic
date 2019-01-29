@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GifTastic</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+
+    <!-- CSS reset sheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <!-- CSS style sheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="container text-center">
+        <h1>Family Guy Characters</h1>
+        <br>
+
+        <!-- buttons will go here -->
+        <div class="row">
+            <div class="col-12" id="characterButtons"></div>
+        </div>
+
+        <!-- form section -->
+        <div class="row">
+            <div class="col-12">
+                <form id="fg-form">
+                    <label for="fg-input">Choose Your Favorite Character</label>
+                    <!-- search bar -->
+                    <input type="text" class="form" id="character-input">
+                    <!-- button to get another character -->
+                    <input id="addCharacter" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+
+        <!-- gifs will go here -->
+        <div class="row">
+            <div class="gif col-12" id="images"></div>
+        </div>
+    </div>
+
+
+
+
+    <!-- jQuery link -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- javaScript link -->
+    <script type="text/javascript" src="assets/js/app.js"></script>
+</body>
+
+</html>

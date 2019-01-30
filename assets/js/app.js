@@ -1,97 +1,92 @@
 $(document).ready(function () {
-    //topics variable with an array of family guy characters
-    var topics = ["Peter Griffin", "Lois Griffin", "Stewie Griffin", "Meg Griffin", "Chris Griffin", "Brian Griffin"];
+    //topics variable with an array of shows
+    var topics = ["Modern Family", "Friends", "Seinfeld", "This Is Us", "Game of Thrones", "Manifest", "Sesame Street"];
+    // var cutOffRating = "PG-13";
 
-    //render all the buttons w/ the array
     function renderButtons() {
         //will loop through the topics array
+        $("#characterButtons").empty();
         for (var i = 0; i < topics.length; i++) {
             var a = $("<button>");
-            // Adding a class
+            
             a.addClass("topics-btn");
-            // Adding a data-attribute with a value of the movie at index i
-            a.attr("data-name", topics[i]);
-            // Providing the button's text with a value of the movie at index
+            a.attr("data-show", topics[i]);
             a.text(topics[i]);
-            // Adding the button to the HTML
-            $("#images").append(a);
+            $("#characterButtons").append(a);
         }
     }
     renderButtons()
 
-    // This function handles events where one button is clicked
-    // $("add-character").on("click", function (event) {
-    //     event.preventDefault();
-    //     var char = $("#characterButtons").val().trim();
-    //     char.push(char);
-    //     renderButtons();
-    // });
+    function displayGif() {
+        // Grabbing and storing the data-show property value from the button
+        var show = $(this).attr("data-show");
 
+        // Constructing a queryURL using the show name
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+            show + "&api_key=dc6zaTOxFJmzC&limit=10&rating=";
 
-    //search giph function pulling up family guy characters
-    function displayCharacters() {
-        var limit = 10;
-        var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=familyguy&limit=10";
-
+        // Performing an AJAX request with the queryURL
         $.ajax({
             url: queryURL,
             method: "GET"
-        }).then(function (response) {
-            console.log(response);
-            var imageUrl = response.data.image_original_url;
+        })
+            // After data comes back from the request
+            .then(function (response) {
+                console.log(queryURL);
 
-            // Creating and storing an image tag
-            var famImage = $("<img>");
+                console.log(response);
+                // storing the data from the AJAX request in the results variable
+                var results = response.data;
 
-            // Setting the images src attribute to imageUrl
-            famImage.attr("src", imageUrl);
-            famImage.attr("alt", "fam image");
+                // Looping through each result item
+                for (var i = 0; i < results.length; i++) {
+                    var gifDiv = $("<div class=gifs>");
+                    var p = $("<p>").text("Rating: " + results[i].rating);
+                    var images = $("<img>");
+                    
+                    images.attr("src", results[i].images.fixed_height_still.url);
+                    images.attr("data-still", results[i].images.fixed_height_still.url);
+                    images.attr("data-state", "still");
+                    images.addClass("gif");
+                    images.attr("data-animate", results[i].images.fixed_height.url);
 
-            // Prepending the images to the images div
-            $("#images").prepend(famImage);
-        });
+                    // Appending the paragraph and image tag to the gifDiv
+                    gifDiv.append(p);
+                    gifDiv.append(images);
+
+
+                    // Prependng the giflDiv to the HTML page
+                    $("#gifsView").prepend(gifDiv);
+                }
+            });
+
     };
-    displayCharacters()
 
-    //submit button function
-    $("#addCharacter").on("click", function () {
+    $("#addShow").on("click", function (event) {
+        event.preventDefault();
+        var newButton = $("#show-input").val().trim();
 
-        var input = $("#user-input").val().trim();
-        form.reset();
-        displayedButtons.push(input);
+        console.log(newButton);
+        topics.push(newButton);
 
         renderButtons();
-
-        return false;
     });
-    //need a var userInput
 
-    //display gif function - refer to assignment 14
-    function gifDisplay() {
-        //need rating diplayed
-        //need images displayed
-    };
-    gifDisplay()
-
-    
-    //on click function to pause and unpause gif
-    $(".gif").on("click", function () {
-
+    $(document).on("click", ".gif", function () {
         var state = $(this).attr("data-state");
 
         if (state === "still") {
-            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("src", $(this).data("animate"));
             $(this).attr("data-state", "animate");
         } else {
-            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("src", $(this).data("still"));
             $(this).attr("data-state", "still");
         }
     });
 
-    $(document).on("click", ".topics-btn", displayCharacters);
+    $(document).on("click", ".topics-btn", displayGif);
+});  //page closing brackets
 
-    //function for the user input - NYT search
-});
 
 
 

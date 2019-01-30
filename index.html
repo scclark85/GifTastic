@@ -20,38 +20,40 @@
 
 <body>
     <div class="container text-center">
-        <h1>Family Guy Characters</h1>
+        <h1>Gif Your Favorite TV Show!</h1>
         <br>
 
         <!-- buttons will go here -->
         <div class="row">
             <div class="col-12" id="characterButtons"></div>
         </div>
+        <br>
 
         <!-- form section -->
         <div class="row">
             <div class="col-12">
                 <form id="fg-form">
-                    <label for="fg-input">Choose Your Favorite Character</label>
+                    <label for="fg-input"></label>
                     <!-- search bar -->
-                    <input type="text" class="form" id="character-input">
-                    <!-- button to get another character -->
-                    <input id="addCharacter" type="submit" value="Submit">
+                    <input type="text" class="form" id="show-input">
+                    <!-- button to get another show -->
+                    <input id="addShow" type="submit" value="Submit">
                 </form>
             </div>
         </div>
 
         <!-- gifs will go here -->
-        <div class="row">
-            <div class="gif col-12" id="images"></div>
-        </div>
+
+        <div id="gifsView"></div>
+
+
     </div>
 
 
 
 
     <!-- jQuery link -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- javaScript link -->
     <script type="text/javascript" src="assets/js/app.js"></script>
